@@ -1,7 +1,6 @@
-import { geo_api_info } from '@utils'
+import PositionItem from '@components/PositionItem'
+import Vue from 'vue'
 
-geo_api_info().then(res => {
-    console.log(res)
-}).catch(err => {
-    console.log(err)
-})
+new Vue({
+    render: h => h(PositionItem)
+}).$mount('#app')

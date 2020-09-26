@@ -1,1 +1,1 @@
-export { getLocation, geo_api_info } from './location'
+export { getLocation } from './location'

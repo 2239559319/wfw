@@ -1,6 +1,7 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const { proxy } = require('./proxy')
 
@@ -25,11 +26,55 @@ const config = {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader']
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [['@babel/preset-env']],
+              plugins: [
+                [
+                  'component',
+                  {
+                    libraryName: 'element-ui',
+                    styleLibraryName: 'theme-chalk'
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.vue$/,
+        use: ['vue-loader']
+      },
+      {
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
       }
     ]
   },
   plugins: [
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(staticPath, 'index.html'),
       filename: 'ncov/wap/default/index'
@@ -39,10 +84,10 @@ const config = {
       filename: 'config'
     })
   ],
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   externals: {
     vue: 'Vue',
-    $: 'jQuery'
+    'element-ui': 'Element'
   },
   resolve: {
     alias: {
@@ -59,7 +104,7 @@ const config = {
     https: true,
     proxy,
     open: true,
-    openPage: 'ncov/wap/default/index'
+    openPage: 'config'
   },
   watch: true
 }

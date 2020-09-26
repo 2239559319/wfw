@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 export function getLocation() {
   return new Promise((resolve, reject) => {
     const mapObj = new AMap.Map('map')
@@ -20,21 +18,5 @@ export function getLocation() {
         else reject(result)
       })
     })
-  })
-}
-
-export async function geo_api_info() {
-  const { position } = await getLocation()
-  $.ajax({
-    url: 'https://api.map.baidu.com/reverse_geocoding/v3/?output=json&coordtype=wgs84ll',
-    dataType: 'jsonp',
-    type: 'GET',
-    data: {
-      ak: '0hYGiH3Ob5ZhV0eWzrGVXCD3bEdBCi6L',
-      location: position.lat + ',' + position.lng
-    },
-    success: function(res) {
-      console.log(res)
-    }
   })
 }

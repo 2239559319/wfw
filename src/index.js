@@ -1,6 +1,9 @@
-import PositionItem from '@components/PositionItem'
-import Vue from 'vue'
+// import PositionItem from '@components/PositionItem'
+// import Vue from 'vue'
 
-new Vue({
-    render: h => h(PositionItem)
-}).$mount('#app')
+// Vue.config.devtools = true
+
+// new Vue({
+//     render: h => h(PositionItem)
+// }).$mount('#app')
+console.log('hello from my script')

@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-const { proxy } = require('./proxy')
+const { proxy, getIndex } = require('./proxy')
 
 const rootPath = path.resolve(__dirname, '..')
 const srcPath = path.join(rootPath, 'src')
@@ -15,6 +15,7 @@ const buildPath = path.join(rootPath, 'build')
 const config = {
   context: rootPath,
   mode: 'development',
+  target: 'web',
   entry: {
     index: path.join(srcPath, 'index.js')
   },
@@ -75,14 +76,7 @@ const config = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(staticPath, 'index.html'),
-      filename: 'ncov/wap/default/index'
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(staticPath, 'config.html'),
-      filename: 'config'
-    })
+    new CleanWebpackPlugin(),
   ],
   devtool: 'source-map',
   externals: {
@@ -104,7 +98,21 @@ const config = {
     https: true,
     proxy,
     open: true,
-    openPage: 'config'
+    openPage: 'config',
+    writeToDisk: true,
+    before (app, server, compiler) {
+      app.get('/config', (req, res) => {
+        res.sendFile(path.join(staticPath, 'config.html'))
+      })
+      app.get('/ncov/wap/default/index', async (req, res) => {
+        let data = await getIndex()
+        data = data
+          .replace('var vm', 'Vue.config.devtools = true;__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = Vue; var vm')
+          .replace(/<\/head>/gm, '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"></head>')
+          .replace(/<\/body>/gm, '<script src="https://unpkg.com/element-ui/lib/index.js"></script><script src="/index.js"></script></body>')
+        res.send(data)
+      })
+    },
   },
   watch: true
 }

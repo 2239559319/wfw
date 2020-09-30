@@ -16,8 +16,9 @@ const proxy = {
     },
   }
 }
-async function getIndex() {
-  const res = await axios.get('https://wfw.scu.edu.cn/ncov/wap/default/index', {
+async function getIndex(path) {
+  const baseUrl = 'https://wfw.scu.edu.cn'
+  const res = await axios.get(baseUrl + path, {
     headers: {
       cookie
     }

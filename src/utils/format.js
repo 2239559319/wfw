@@ -1,17 +1,34 @@
 /**
- * 返回具体信息
- * @param {string} locationStr
+ * 将location对象转换为字符串
+ * @param {Object} locationObj
+ * @return {string}
  */
-export function formatLocation(locationStr) {
-  const locationObj = JSON.parse(locationStr)
-  const { address, addressComponent } = locationObj
+export function toLocationStr(locationObj) {
+	return JSON.stringify(locationObj)
+}
+
+/**
+ * 将location字符串转换对象
+ * @param {string} locationStr 
+ */
+export function toLocationObj(locationStr) {
+	return JSON.parse(locationStr)
+}
+
+/**
+ * 返回具体信息
+ * @param {string | Object} location
+ */
+export function formatLocation(location) {
+  const locationObj =  typeof location === 'string' ? toLocationObj(location) : location
+  const { formattedAddress, addressComponent } = locationObj
   let { province, city, district } = addressComponent
   const area = province + ' ' + city + ' ' + district
   if (city === '' && ['成都市', '上海市', '重庆市', '天津市'].indexOf(province) !== -1) {
     city = province
   }
   return {
-    address,
+    formattedAddress,
     area,
     province,
     city,
@@ -20,10 +37,10 @@ export function formatLocation(locationStr) {
 }
 /**
  * 返回经纬度
- * @param {string} locationStr
+ * @param {string | Object} location
  */
-export function formatLocationToQR(locationStr) {
-  const { position } = JSON.parse(locationStr)
+export function formatLocationToQR(location) {
+	const { position } = typeof location === 'string' ? toLocationObj(location) : location
   const { Q, R } = position
   return {
     Q,

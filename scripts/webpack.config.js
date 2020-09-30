@@ -17,11 +17,12 @@ const config = {
   mode: 'development',
   target: 'web',
   entry: {
-    index: path.join(srcPath, 'index.js')
+    index: path.join(srcPath, 'index.js'),
+    config: path.join(srcPath, 'configIndex.js')
   },
   output: {
     path: buildPath,
-    filename: 'index.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -79,10 +80,10 @@ const config = {
     new CleanWebpackPlugin(),
   ],
   devtool: 'source-map',
-  externals: {
-    vue: 'Vue',
-    'element-ui': 'Element'
-  },
+  // externals: {
+  //   vue: 'Vue',
+  //   'element-ui': 'ElementUI'
+  // },
   resolve: {
     alias: {
       '@utils': path.join(srcPath, 'utils'),
@@ -105,7 +106,15 @@ const config = {
         res.sendFile(path.join(staticPath, 'config.html'))
       })
       app.get('/ncov/wap/default/index', async (req, res) => {
-        let data = await getIndex()
+        let data = await getIndex('/ncov/wap/default/index')
+        data = data
+          .replace('var vm', 'Vue.config.devtools = true;__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = Vue; var vm')
+          .replace(/<\/head>/gm, '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"></head>')
+          .replace(/<\/body>/gm, '<script src="https://unpkg.com/element-ui/lib/index.js"></script><script src="/index.js"></script></body>')
+        res.send(data)
+      })
+      app.get('/ncov/wap/default/recently', async (req, res) => {
+        let data = await getIndex('/ncov/wap/default/recently')
         data = data
           .replace('var vm', 'Vue.config.devtools = true;__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue = Vue; var vm')
           .replace(/<\/head>/gm, '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"></head>')

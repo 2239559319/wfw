@@ -27,10 +27,10 @@ export function addToLocationList(locationStr) {
   }
   list.push(locationStr)
   list.sort((a, b) => {
-    const { area: area1 } = formatLocation(a)
-    const { area: area2 } = formatLocation(b)
-    if (area1 === area2) return 0
-    else if (area1 > area2) return 1
+    const { formattedAddress: addr1 } = formatLocation(a)
+    const { formattedAddress: addr2 } = formatLocation(b)
+    if (addr1 === addr2) return 0
+    else if (addr1 > addr2) return 1
     else return -1
   })
   localStorage.setItem('location', JSON.stringify(list))

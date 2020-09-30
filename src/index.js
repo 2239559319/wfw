@@ -6,4 +6,12 @@
 // new Vue({
 //     render: h => h(PositionItem)
 // }).$mount('#app')
-console.log('hello from my script')
+// import { getLocation } from '@utils'
+// import { formatLocation } from './utils/format'
+
+// getLocation().then(v => {
+// 	console.log(v)
+// })
+
+// console.log('hello from my script')
+

@@ -14,7 +14,6 @@ const buildPath = path.join(rootPath, 'build')
  */
 const config = {
   context: rootPath,
-  mode: 'development',
   target: 'web',
   entry: {
     index: path.join(srcPath, 'index.js'),
@@ -32,16 +31,7 @@ const config = {
           {
             loader: 'babel-loader',
             options: {
-              presets: [['@babel/preset-env']],
-              plugins: [
-                [
-                  'component',
-                  {
-                    libraryName: 'element-ui',
-                    styleLibraryName: 'theme-chalk'
-                  }
-                ]
-              ]
+              presets: [['@babel/preset-env']]
             }
           }
         ]
@@ -80,14 +70,15 @@ const config = {
     new CleanWebpackPlugin(),
   ],
   devtool: 'source-map',
-  // externals: {
-  //   vue: 'Vue',
-  //   'element-ui': 'ElementUI'
-  // },
+  externals: {
+    vue: 'Vue',
+    'element-ui': 'ELEMENT'
+  },
   resolve: {
     alias: {
       '@utils': path.join(srcPath, 'utils'),
-      '@components': path.join(srcPath, 'components')
+      '@components': path.join(srcPath, 'components'),
+      "@assets": path.join(srcPath, 'assets')
     },
     extensions: ['.js', '.vue']
   },
@@ -123,7 +114,7 @@ const config = {
       })
     },
   },
-  watch: true
+  watch: process.env.NODE_ENV === 'development'
 }
 
 module.exports = config

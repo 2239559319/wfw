@@ -1,13 +1,16 @@
-import Vue from 'vue'
-import PositionTable from './components/PositionTable'
-import item from '../test/location.json'
+// import Vue from 'vue'
+// import ELEMENT from 'element-ui'  
+// import PositionTable from './components/PositionTable'
+// import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.config.devtools = true
+// Vue.use(ELEMENT)
 
-new Vue({
-	render: h => h(PositionTable, {
-		props: {
-			'table-data': [item]
-		}
-	})
-}).$mount('#app')
+// Vue.config.devtools = true
+
+// new Vue({
+// 	render: h => h(PositionTable)
+// }).$mount('#app')
+
+import { getLocation } from '@utils'
+
+getLocation().then(console.log)

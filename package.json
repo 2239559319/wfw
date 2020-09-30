@@ -1,14 +1,15 @@
 {
   "name": "wfw",
   "version": "1.0.0",
-  "description": "",
+  "description": "scu wfw",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --config scripts/webpack.config.js"
+    "dev": "cross-env NODE_ENV=develepment webpack-dev-server --config scripts/webpack.config.js",
+    "build": "cross-env NODE_ENV=production webpack --mode production  --config scripts/webpack.config.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "xiaochuan",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -16,6 +17,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-component": "^1.1.1",
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.3.0",
     "file-loader": "^6.1.0",
     "html-webpack-plugin": "^4.5.0",
@@ -30,7 +32,6 @@
   "dependencies": {
     "axios": "^0.20.0",
     "element-ui": "^2.13.2",
-    "iconv-lite": "^0.6.2",
     "vue": "^2.6.12"
   }
 }

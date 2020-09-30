@@ -13,19 +13,19 @@ export function compareTwoLocation(location1, location2) {
   return Q1.toString() === Q2.toString() && R1.toString() === R2.toString()
 }
 
-export function addToLocationList(locationStr) {
+export function addToLocationList(location) {
   let list = localStorage.getItem('location')
   if (!list) {
-    list = [locationStr]
+    list = [location]
     localStorage.setItem('location', JSON.stringify(list))
     return Promise.resolve(true)
   } else {
     list = JSON.parse(list)
   }
   for (const item of list) {
-    if (compareTwoLocation(item, locationStr)) return Promise.resolve(false)
+    if (compareTwoLocation(item, location)) return Promise.resolve(false)
   }
-  list.push(locationStr)
+  list.push(location)
   list.sort((a, b) => {
     const { formattedAddress: addr1 } = formatLocation(a)
     const { formattedAddress: addr2 } = formatLocation(b)

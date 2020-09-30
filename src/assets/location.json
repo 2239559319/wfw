@@ -1,0 +1,45 @@
+{
+  "position": { "Q": 39.963121473525, "R": 116.33916259765698, "lng": 116.339163, "lat": 39.963121 },
+  "location_type": "html5",
+  "message": "Get geolocation success.Convert Success.Get address success.",
+  "accuracy": 30,
+  "isConverted": true,
+  "status": 1,
+  "addressComponent": {
+    "citycode": "010",
+    "adcode": "110108",
+    "businessAreas": [
+      {
+        "name": "皂君庙",
+        "id": "110108",
+        "location": { "Q": 39.960782, "R": 116.339629, "lng": 116.339629, "lat": 39.960782 }
+      },
+      {
+        "name": "大钟寺村",
+        "id": "110108",
+        "location": { "Q": 39.965569, "R": 116.339877, "lng": 116.339877, "lat": 39.965569 }
+      },
+      {
+        "name": "北下关",
+        "id": "110108",
+        "location": { "Q": 39.955976, "R": 116.33873, "lng": 116.33873, "lat": 39.955976 }
+      }
+    ],
+    "neighborhoodType": "",
+    "neighborhood": "",
+    "building": "",
+    "buildingType": "",
+    "street": "皂君庙东路",
+    "streetNumber": "甲7号",
+    "country": "中国",
+    "province": "北京市",
+    "city": "",
+    "district": "海淀区",
+    "township": "北下关街道"
+  },
+  "formattedAddress": "北京市海淀区北下关街道四道口南二街环保宿舍",
+  "roads": [],
+  "crosses": [],
+  "pois": [],
+  "info": "SUCCESS"
+}

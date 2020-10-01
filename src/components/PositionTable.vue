@@ -72,7 +72,7 @@ export default {
         },
         delRow(index) {
             removeLocationItem(index)
-            this.lists = []
+            this.getDataList()
         },
         addLocation() {
             getLocation().then(v => {

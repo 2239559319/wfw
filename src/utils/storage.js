@@ -55,5 +55,6 @@ export function removeLocationItem(index) {
     list = JSON.parse(list)
   }
   list.splice(index, 1)
+  localStorage.setItem('location', JSON.stringify(list))
   return Promise.resolve(true)
 }

@@ -1,6 +1,6 @@
 {
   "name": "wfw",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "scu wfw",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,13 @@
     "dev": "cross-env NODE_ENV=develepment webpack-dev-server --config scripts/webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --mode production  --config scripts/webpack.config.js"
   },
-  "keywords": [],
+  "files": [
+    "src",
+    "build"
+  ],
+  "keywords": ["scu", "微服务"],
   "author": "xiaochuan",
-  "license": "ISC",
+  "license": "GPL_3",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",

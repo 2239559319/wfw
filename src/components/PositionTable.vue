@@ -74,10 +74,12 @@ export default {
             removeLocationItem(index)
             this.lists = []
         },
-        async addLocation() {
-            const location = await getLocation()
-            await addToLocationList(location)
-            this.getDataList()
+        addLocation() {
+            getLocation().then(v => {
+                return addToLocationList(v)
+            }).then(v => {
+                this.getDataList()
+            })
         }
     }
 }
